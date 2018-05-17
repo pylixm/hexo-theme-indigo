@@ -1,6 +1,7 @@
 <%- partial('_partial/header', {
     title: page.title,
-    hdClass: 'post-header'
+    hdClass: 'post-header',
+    titleClass: 'title'
 }) %>
 <%
 page.reward = 'reward' in page ? (theme.reward && page.reward) : theme.reward

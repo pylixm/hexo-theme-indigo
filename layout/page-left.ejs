@@ -1,6 +1,6 @@
 <%- partial('_partial/header', {
     title: page.title,
-    hdClass: 'page-header',
+    hdClass: 'post-header',
     titleClass: ''
 }) %>
 <%
@@ -8,12 +8,12 @@ page.reward = 'reward' in page ? (theme.reward && page.reward) : theme.reward;
 page.slug = 'hexo-page-' + page.path.replace(/\/index\.html$/,'').split('/').join('-');
 %>
 <div class="container body-wrap">
-    <article class="page-article fade" itemprop="blogPage">
-        <div class="post-content page-content" id="page-content" itemprop="pageContent">
-            <%- page.content.replace(/<p>}<\/p>/g, '</div>')
-                .replace(/<p>@([\w-]+){<\/p>/g, function(match, $1){
-                return '<div class="'+ $1 +'">'
-            }) %>
+    <%- partial('_partial/post/toc', { post: page}) %>
+    <article class="page-article fade" itemprop="blogPage" style="width:80%;">
+        <div class="card">
+            <div class="post-content" id="post-content" itemprop="postContent">
+                <%- page.content %>
+            </div>
         </div>
 
         <% if(theme.about){ %>
@@ -29,10 +29,6 @@ page.slug = 'hexo-page-' + page.path.replace(/\/index\.html$/,'').split('/').joi
 
         </div>
         <% } %>
-
-        <%- partial('_partial/post/reward-btn') %>
-
         <%- partial('_partial/post/comment', { post: page }) %>
     </article>
-    <%- partial('_partial/post/reward') %>
 </div>
